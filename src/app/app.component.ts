@@ -10,6 +10,7 @@ import { Post } from './post.model';
 })
 export class AppComponent implements OnInit {
   loadedPosts: Post [] = [];
+  isFetchin = false;
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   onCreatePost(postData: Post) {
+    console.log(postData);
     // Send Http request
     this.http
       .post(
@@ -36,6 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isFetchin = true;
     this.http.get('https://httpmax-8a9bc.firebaseio.com/posts.json')
     .pipe(map( (responseData: { [key: string]: Post}) => {
       const postArray: Post [] = [];
@@ -47,6 +50,7 @@ export class AppComponent implements OnInit {
       return postArray;
     }))
     .subscribe(post => {
+      this.isFetchin = false;
       this.loadedPosts = post;
     });
   }
