@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from './post.model';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Injectable({providedIn: 'root'})
@@ -34,9 +35,20 @@ export class PostsService {
       return postArray;
     }));
     // .subscribe(post => {
-
     // });
+  }
 
+  deletePosts() {
+     return this.http.delete('https://httpmax-8a9bc.firebaseio.com/posts.json');
+  }
+
+  deleteJedanPosts(id: string): Observable<{}> {
+    console.log(id);
+    const URL = 'https://httpmax-8a9bc.firebaseio.com/posts/' + id;
+     this.http.delete(URL)
+     .subscribe(data =>{
+       console.log(data);
+     });
   }
 
 }

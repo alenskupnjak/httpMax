@@ -56,6 +56,8 @@
         <li class="list-group-item" *ngFor="let post of loadedPosts">
           <h3>{{post.title}}</h3>
           <p>{{post.content}}</p>
+          <p>{{post.id}}</p>
+          <button class="btn btn-danger" style="margin-right: 10;" (click)="obrisiZapis(post.id)">X</button>
         </li>
       </ul>
       <p *ngIf="isFetchin">Usnimavam...</p>
