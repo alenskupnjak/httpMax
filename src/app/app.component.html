@@ -60,7 +60,11 @@
           <button class="btn btn-danger" style="margin-right: 10;" (click)="obrisiZapis(post.id)">X</button>
         </li>
       </ul>
-      <p *ngIf="isFetchin">Usnimavam...</p>
+      <p *ngIf="isFetchin && !error">Usnimavam...</p>
+      <div class="alert alert-danger" *ngIf="error">
+          <h1> Ane error Occured!</h1>
+          <p>{{error}}</p>
+      </div>
     </div>
   </div>
 </div>
