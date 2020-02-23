@@ -11,13 +11,17 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.fetchPosts();
+  }
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     this.http
       .post(
-        'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
+        // moja veza https://httpmax-8a9bc.firebaseio.com/
+        'https://httpmax-8a9bc.firebaseio.com/posts.json',
         postData
       )
       .subscribe(responseData => {
@@ -26,10 +30,20 @@ export class AppComponent implements OnInit {
   }
 
   onFetchPosts() {
-    // Send Http request
+   this.fetchPosts();
+  }
+
+  private fetchPosts() {
+    this.http.get('https://httpmax-8a9bc.firebaseio.com/posts.json')
+    .subscribe(post => {
+      console.log(post);
+    });
   }
 
   onClearPosts() {
     // Send Http request
   }
+
+
+
 }
