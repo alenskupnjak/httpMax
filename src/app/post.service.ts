@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, Subject, throwError } from 'rxjs';
@@ -28,7 +28,11 @@ export class PostsService {
   }
 
   fetchPosts() {
-    return this.http.get('https://httpmax-8a9bc.firebaseio.com/posts.json')
+    return this.http.get('https://httpmax-8a9bc.firebaseio.com/posts.json',
+    {
+      headers: new HttpHeaders ({'Custom-Header': 'Hello'}),
+      params: new HttpParams().set('print', 'pretty')
+    })
     .pipe(map( (responseData: { [key: string]: Post}) => {
       const postArray: Post [] = [];
       for (const data in responseData) {
@@ -47,7 +51,10 @@ export class PostsService {
   }
 
   deletePosts() {
-     return this.http.delete('https://httpmax-8a9bc.firebaseio.com/posts.json');
+     return this.http.delete('https://httpmax-8a9bc.firebaseio.com/posts.json', {
+       observe: 'events',
+       responseType: 'json'
+     });
   }
 
   deleteJedanPosts(id: string): Observable<{}> {
