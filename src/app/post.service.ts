@@ -56,13 +56,13 @@ export class PostsService {
      });
   }
 
-  deleteJedanPosts(id: string): Observable<{}> {
-    console.log(id);
-    const URL = 'https://httpmax-8a9bc.firebaseio.com/posts/' + id;
-     this.http.delete(URL)
-     .subscribe(data =>{
-       console.log(data);
-     });
-  }
+  // deleteJedanPosts(id: string): {
+  //   console.log(id);
+  //   const URL = 'https://httpmax-8a9bc.firebaseio.com/posts/' + id;
+  //    this.http.delete(URL)
+  //    .subscribe(data =>{
+  //      console.log(data);
+  //    });
+  // }
 
 }

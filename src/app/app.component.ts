@@ -4,7 +4,6 @@ import { map, catchError } from 'rxjs/operators';
 import { Post } from './post.model';
 import { PostsService } from './post.service';
 import { error } from 'util';
-import { runInThisContext } from 'vm';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -56,9 +55,9 @@ export class AppComponent implements OnInit, OnDestroy {
    });
   }
 
-  obrisiZapis(id: string) {
-    this.postService.deleteJedanPosts(id);
-  }
+  // obrisiZapis(id: string) {
+  //   this.postService.deleteJedanPosts(id);
+  // }
 
     ngOnDestroy() {
       this.errorSub.unsubscribe();
