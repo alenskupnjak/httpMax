@@ -31,7 +31,6 @@ export class PostsService {
     return this.http.get('https://httpmax-8a9bc.firebaseio.com/posts.json',
     {
       headers: new HttpHeaders ({'Custom-Header': 'Hello'}),
-      params: new HttpParams().set('print', 'pretty')
     })
     .pipe(map( (responseData: { [key: string]: Post}) => {
       const postArray: Post [] = [];
