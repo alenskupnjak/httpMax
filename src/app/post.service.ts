@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Post } from './post.model';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, Subject, throwError } from 'rxjs';
+
+import { Post } from './post.model';
 
 
 @Injectable({providedIn: 'root'})
@@ -16,8 +17,8 @@ export class PostsService {
     const postData: Post = {title: title, content: content};
     this.http
     .post(
-      // moja veza https://httpmax-8a9bc.firebaseio.com/
-      'https://httpmax-8a9bc.firebaseio.com/posts.json',
+      // 'https://httpmax-8a9bc.firebaseio.com/posts.json', staro spajanje
+      'https://crudzaposlenici.firebaseio.com/posts.json',
       postData
     )
     .subscribe(responseData => {
@@ -28,7 +29,7 @@ export class PostsService {
   }
 
   fetchPosts() {
-    return this.http.get('https://httpmax-8a9bc.firebaseio.com/posts.json',
+    return this.http.get('https://crudzaposlenici.firebaseio.com/posts.json',
     {
       headers: new HttpHeaders ({'Custom-Header': 'Hello'}),
     })
@@ -50,19 +51,16 @@ export class PostsService {
   }
 
   deletePosts() {
-     return this.http.delete('https://httpmax-8a9bc.firebaseio.com/posts.json', {
+     return this.http.delete('https://crudzaposlenici.firebaseio.com/posts.json', {
        observe: 'events',
        responseType: 'json'
      });
   }
 
-  // deleteJedanPosts(id: string): {
-  //   console.log(id);
-  //   const URL = 'https://httpmax-8a9bc.firebaseio.com/posts/' + id;
-  //    this.http.delete(URL)
-  //    .subscribe(data =>{
-  //      console.log(data);
-  //    });
-  // }
+  deleteJedanPosts(id: string) {
+    this.http.delete('https://crudzaposlenici.firebaseio.com/posts/id:' + id).subscribe(res => {
+      console.log(res);
+    });
+  }
 
 }

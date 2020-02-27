@@ -36,6 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onCreatePost(postData: Post) {
     this.postService.creatAndStorePost(postData.title, postData.content);
+    this.onFetchPosts();
   }
 
   onFetchPosts() {
@@ -55,9 +56,9 @@ export class AppComponent implements OnInit, OnDestroy {
    });
   }
 
-  // obrisiZapis(id: string) {
-  //   this.postService.deleteJedanPosts(id);
-  // }
+  obrisiZapis(id: string) {
+    this.postService.deleteJedanPosts(id);
+  }
 
     ngOnDestroy() {
       this.errorSub.unsubscribe();
