@@ -29,9 +29,14 @@ export class PostsService {
   }
 
   fetchPosts() {
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append('print', 'pretty');
+    searchParams = searchParams.append('custom', 'key');
     return this.http.get('https://crudzaposlenici.firebaseio.com/posts.json',
     {
       headers: new HttpHeaders ({'Custom-Header': 'Hello'}),
+      params: searchParams,
+      responseType: 'json'
     })
     .pipe(map( (responseData: { [key: string]: Post}) => {
       const postArray: Post [] = [];

@@ -8,9 +8,8 @@ export class AuthProbaService implements HttpInterceptor {
     const modifiedRequest = req.clone({headers: req.headers.append('Autorizacija', 'moje')});
     return next.handle(modifiedRequest)
     .pipe(tap (event => {
-      console.log(event);
       if (event.type === HttpEventType.Response) {
-        console.log('Response arrived, body data: ');
+        console.log('Response paroba arrived, body data: ');
         console.log(event.body);
       }
     }));
